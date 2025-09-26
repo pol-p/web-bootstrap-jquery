@@ -16,11 +16,30 @@
         
     </div>
 
-    <div class="container-fluid pt-5">
-        <div class="text-center">
-            <input type="text" placeholder="pol-p">
-            <button type="submit" class="btn-dark">Search</button>
+    <div class="container p-5">
+        <div class="input-group mb-1">
+            <input type="text" class="form-control" placeholder="pol-p">
+            <button type="submit" class="btn btn-primary">Search</button>
         </div>
     </div>  
+
+    <div class="container mt-3" id="Tabla">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Num. Followers</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td id="Name"></td>
+                    <td id="Description"></td>
+                    <td id="NumFollow"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
