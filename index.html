@@ -22,14 +22,26 @@
 
                 $.ajax({ 
                     type: 'GET', 
-                    url: 'https://api.github.com/users/' + $('#Usrname').val(), 
+                    url: 'https://api.github.com/users/' + $('#Usrname').val() + '/repos', 
                     dataType: 'json',
                     success: function (data) { 
-                        alert(JSON.stringify(data.login));
+                        $('#Btabla').empty();
+                        
+                        $.each(data, function(index, repo) {
+                            var newRow = '<tr>' +
+                                '<td>' + repo.name + '</td>' +
+                                '<td>' + (repo.description || 'Sin descripción') + '</td>' +
+                                '<td>' + (repo.stargazers_count || 0) + '</td>' +
+                                '</tr>';                            
+                            $('#Btabla').append(newRow);
+                        });
+                        $("#Tabla").show();
+                    },
+                    error: function(codigo, _, error) {
+                        $("#Tabla").hide();
+                        alert('Error ' + codigo.status + ' al obtener los repositorios: ' + error);
                     }
                 });
-                
-                $("#Tabla").show();
             });
         });
         
@@ -52,17 +64,13 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Num. Followers</th>
+                    <th>Nombre del Repositorio</th>
+                    <th>Descripción</th>
+                    <th>Estrellas</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr id="info">
-                    <td id="Name"></td>
-                    <td id="Description"></td>
-                    <td id="NumFollow"></td>
-                </tr>
+            <tbody id="Btabla">
+                <!-- Filas dinamicas creadas por el Jquery -->
             </tbody>
         </table>
     </div>
